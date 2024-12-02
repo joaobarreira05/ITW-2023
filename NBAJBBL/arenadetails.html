@@ -1,0 +1,189 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>ITW 2023/24 - NBA Arena Details</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="myCSS.css" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html" tabindex="NBA"><img src="https://logodownload.org/wp-content/uploads/2016/11/nba-logo-1.png" height="24" /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="arenas.html"><i class="fa fa-futbol text-warning"></i> Arenas</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="jogadores.html"><i class="fa fa-user text-primary"></i> Players</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="teams.html"><i class="fa fa-flag text-danger"></i> Teams</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="states.html"><i class="fa fa-map-marker text-success"></i> States</a></li>
+
+                    <li class="nav-item dropdown">
+                        <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-light">
+                            <li><a class="dropdown-item" href="seasons.html">Seasons</a></li>
+                            <li><a class="dropdown-item" href="divisions.html">Divisions</a></li>
+                            <li><a class="dropdown-item" href="seasonstypes.html">Seasons Types</a></li>
+                            <li><a class="dropdown-item" href="conferences.html">Conferences</a></li> <li><a class="dropdown-item" href="posicoes.html">Positions</a></li><li><a class="dropdown-item" href="login.html">Especial</a></li>
+                            
+                        </ul>
+                    </li>
+                </ul>
+                <div class="form-check form-switch ms-auto">
+                    <input class="form-check-input" type="checkbox" id="darkModeToggle">
+                    <label class="form-check-label" for="darkModeToggle">Dark Mode</label>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Work Area-->
+    <div class="container">
+        <div class="py-2 border-bottom mb-3">
+            <h2 data-bind="text: Name()"></h2>
+        </div>
+
+        <div class="card border-bottom g-2">
+            <div class="card-body row">
+                <div class="col-2 fw-bold">Game Id</div>
+                <div class="col-10" data-bind="text: Id"></div>
+            </div>
+        </div>
+        <div class="card border-bottom g-2">
+            <div class="card-body row">
+                <div class="col-2 fw-bold">Name</div>
+                <div class="col-10" data-bind="text: Name"></div>
+            </div>
+        </div>
+        <div class="card border-bottom g-2">
+            <div class="card-body row">
+                <div class="col-2 fw-bold">State</div>
+                <div class="col-10">
+                    <a class="nav-link" data-bind="text: StateName, attr: { href:'./stateDetails.html?id=' + StateId }" title="Show State Details"></a>
+                </div>
+            </div>
+        </div>
+        <div class="card border-bottom g-2">
+            <div class="card-body row">
+                <div class="col-2 fw-bold">Team</div>
+                <div class="col-10">
+                    <a class="nav-link" data-bind="text:'[' + TeamAcronym() + '] ' + TeamName(), attr: { href:'./teamdetails.html?id=' + TeamId }" title="Show Team Details"></a>
+                </div>
+            </div>
+        </div>
+        <div class="card border-bottom g-2">
+            <div class="card-body row">
+                <div class="col-2 fw-bold">Location</div>
+                <div class="col-10" data-bind="text: Location"></div>
+            </div>
+        </div>
+        <div class="card border-bottom g-2">
+            <div class="card-body row">
+                <div class="col-2 fw-bold">Capacity</div>
+                <div class="col-10" data-bind="text: Capacity"></div>
+            </div>
+        </div>
+
+
+
+
+        <div class="card border-bottom g-2" data-bind="visible: Photo() != '' && Photo() != null">
+            <div class="card-body row">
+                <div class="col-2 fw-bold">Photo</div>
+                <div class="small col-10 mt-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top img-thumbnail" data-bind="attr:{src: Photo}" alt="Arena Photo">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map Section -->
+        <div class="card mt-3">
+            <div class="card-header">
+                Arena Map
+            </div>
+            <div class="card-body">
+                <!-- Leaflet Map Container -->
+                <div id="map" style="height: 400px;"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <a href="./arenas.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <img src="https://static.vecteezy.com/ti/vetor-gratis/p3/15863585-logotipo-da-nba-em-fundo-transparente-gratis-vetor.jpg" height="30" class="mr-2" />
+                        Loading...
+                    </h5>
+                    <button type="button" class="fa-close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <p class="mt-2">Sit back and relax!</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Work Area -->
+    <nav class="navbar navbar-dark bg-dark fixed-bottom">
+        <div class="container small">
+            <div class="navbar-text text-white">🚀 &copy; Introdução às Tecnologias Web - 2023/24</div>
+            <div class="navbar-text text-white">Made with <i class="fa fa-heart text-danger"></i> for U by Bernardo Lázaro and João Barreira</div>
+            <div class="navbar-nav">
+                <div class="nav-item text-end">
+                    <a href="https://www.ua.pt" class="nav-link text-white" target="_blank">
+                        <i class="fa fa-university"></i> Universidade de Aveiro
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/knockout@3.5.1/build/output/knockout-latest.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
+
+
+
+    <script src="arenasdetails.js"></script>
+    <script src="JavaScript.js"></script>
+</body>
+</html>

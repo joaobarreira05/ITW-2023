@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>ITW 2023/24 - NBA Players List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" rel="stylesheet" />
+ 
+    <link href="myCSS.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html" tabindex="NBA"><img src="https://logodownload.org/wp-content/uploads/2016/11/nba-logo-1.png" height="24" /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="arenas.html"><i class="fa fa-futbol text-warning"></i> Arenas</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="jogadores.html"><i class="fa fa-user text-primary"></i> Players</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="teams.html"><i class="fa fa-flag text-danger"></i> Teams</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="States.html"><i class="fa fa-map-marker text-success"></i> States</a></li>
+
+                    <li class="nav-item dropdown">
+                        <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-light">
+                            <li><a class="dropdown-item" href="seasons.html">Seasons</a></li>
+                            <li><a class="dropdown-item" href="divisions.html">Divisons</a></li>
+                            <li><a class="dropdown-item" href="seasonstypes.html">Seasons Types</a></li>
+                            <li><a class="dropdown-item" href="conferences.html">Conferences</a></li> <li><a class="dropdown-item" href="posicoes.html">Positions</a></li><li><a class="dropdown-item" href="login.html">Especial</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="form-check form-switch ms-auto">
+                    <input class="form-check-input" type="checkbox" id="darkModeToggle">
+                    <label class="form-check-label" for="darkModeToggle">Dark Mode</label>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="p-5 text-center" style="margin-top: 80px;">
+        <h1 class="mb-3">Favourite Players</h1>
+        <h5 class="mb-3">Your favourited players from the Players List</h5>
+        <a class="btn" href="jogadores.html" role="button" style="background-color: #007bff; border-color: #007bff; color: #fff;">Back to players</a>
+        <button class="btn" id="clearFavourites" role="button" style="background-color: #ff6a00; border-color: #ffc107; color: #212529;">Clear favourites</button>
+        <hr>
+    </div>
+    <div class="container d-flex justify-content-center" style="margin-bottom: 100px">
+        <!-- ko if: records -->
+        <div class="row" data-bind="foreach: records">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-img-top" style="background-image: url(#); background-size: cover; background-position: center; height: 200px;" data-bind="style: { backgroundImage: 'url(' + Photo + ')' }"></div>
+                    <div class="card-body">
+                        <h5 class="card-title" data-bind="text: Name"></h5>
+                        <p class="card-text">
+                            <strong>Id:</strong> <span data-bind="text: Id"></span><br />
+                            <strong>Birthdate:</strong> <span data-bind="text: formatBirthdate(Birthdate)"></span><br />
+                            <strong>Draft Year:</strong> <span data-bind="text: DraftYear"></span><br />
+                            <strong>Country:</strong> <a data-bind="text: CountryName" title="Show State Details"></a>
+                        </p>
+                        <a href="#" class="btn btn-primary" data-bind="attr: { href: './playerdetails.html?id=' + Id }">Show details</a>
+                        <button class="btn btn-danger btn-sm fav-btn" data-bind="click: function (data, event) {$root.removeFavourite(Id)}"><i class="fa fa-trash-alt"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko ifnot: records-->
+        <div class="row d-block">
+            <p><h1>I'M SORRY :)  <i style="color: red" class="fa fa-heart"></i></h1><h6>You don´t have any player</h6></p>
+        </div>
+        <!-- /ko -->
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content bg-dark text-white">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            <img src="https://static.vecteezy.com/ti/vetor-gratis/p3/15863585-logotipo-da-nba-em-fundo-transparente-gratis-vetor.jpg" height="30" class="mr-2" />
+                            Loading...
+                        </h5>
+                        <button type="button" class="fa-close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <p class="mt-2">Sit back and relax!</p>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Working Area -->
+        <!-- End of Work Area -->
+        <nav class="navbar navbar-dark bg-dark fixed-bottom">
+            <div class="container small">
+                <div class="navbar-text text-white">🚀 &copy; Introdução às Tecnologias Web - 2023/24</div>
+                <div class="navbar-text text-white">Made with <i class="fa fa-heart text-danger"></i> for U by Bernardo Lázaro and João Barreira</div>
+                <div class="navbar-nav">
+                    <div class="nav-item text-end">
+                        <a href="https://www.ua.pt" class="nav-link text-white" target="_blank">
+                            <i class="fa fa-university"></i> Universidade de Aveiro
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/knockout@3.5.1/build/output/knockout-latest.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+            function formatBirthdate(birthdate) {
+                // Criar um objeto Date a partir da string
+                const dateObject = new Date(birthdate);
+
+                // Extrair o ano, mês e dia
+                const year = dateObject.getFullYear();
+                const month = ('0' + (dateObject.getMonth() + 1)).slice(-2); // adiciona zero à esquerda se for necessário
+                const day = ('0' + dateObject.getDate()).slice(-2); // adiciona zero à esquerda se for necessário
+
+                // Retornar a data formatada
+                return `${year}-${month}-${day}`;
+            }
+        </script>
+
+        <script src="jogadoresfavoritos.js"></script>
+        <script src="JavaScript.js"></script>
+
+</body>
+</html>

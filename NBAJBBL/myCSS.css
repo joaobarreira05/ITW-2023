@@ -1,0 +1,80 @@
+﻿body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 56px 0 56px 0;
+}
+
+/* button default
+---------------------------- */
+.btn-default {
+    color: #333;
+    background-color: #f8f9fa;
+    border-color: #ccc;
+}
+
+    .btn-default:focus {
+        color: #333;
+        background-color: #e6e6e6;
+        border-color: #8c8c8c;
+    }
+
+    .btn-default:active,
+    .btn-default:hover {
+        color: #333;
+        background-color: #e6e6e6;
+        border-color: #adadad;
+    }
+
+/* button-xs
+---------------------------- */
+.btn-group-xs > .btn, .btn-xs {
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+li.page-item a {
+    font-size: 0.85rem;
+}
+.favorite {
+    color: red;
+}
+.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+    .dark-mode .navbar-light .navbar-toggler-icon {
+        background-color: #fff;
+    }
+
+    .dark-mode .navbar-light .navbar-toggler:focus,
+    .dark-mode .navbar-light .navbar-toggler:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .dark-mode .navbar-light .navbar-toggler:focus,
+    .dark-mode .navbar-light .navbar-toggler-icon {
+        border: 1px solid #fff;
+    }
+
+    .dark-mode .navbar-light .navbar-toggler-icon {
+        border: 1px solid #fff;
+    }
+.btn-back-to-players {
+    background-color: #007bff; /* Blue color */
+    border-color: #007bff; /* Border color */
+    color: #fff; /* Text color */
+}
+
+.btn-clear-favourites {
+    background-color: #ffc107; /* Orange color */
+    border-color: #ffc107; /* Border color */
+    color: #212529; /* Text color */
+}
+.modal {
+    z-index: 1000; /* Ajuste este valor conforme necessário */
+  }
+  .container {
+    z-index: 10; /* Ajuste este valor conforme necessário */
+  }
